@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Virtual Environment
+scraper-env/
+
+# Jupyter Notebook Checkpoints
+.ipynb_checkpoints/
+
+# Excel or result files
+*.csv
+*.xlsx
+*.xls
+
+# OS/Editor-specific
+.DS_Store
+.vscode/
+.idea/
