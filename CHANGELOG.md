@@ -3,6 +3,7 @@
 ## [v1.2] - 2025-05-25
 ### Added
 - Filename: main.py / main.ipynb
+- Added a videos only filter to avoid yotube shorts
 - Exported scraped data to 'csvs' directory
 - Adding logging feature
 - No reduntant channel url links 
