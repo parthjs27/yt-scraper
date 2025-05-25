@@ -62,7 +62,7 @@ Follow these steps to get the scraper up and running:
 4.  **Install the required Python packages:**
     Once your virtual environment is active, install the necessary libraries using pip.
     ```bash
-    pip install selenium pandas webdriver-manager
+    pip install -r requirements.txt
     ```
 
 ---
