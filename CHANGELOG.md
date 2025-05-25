@@ -19,6 +19,4 @@
 - Filename: scraper.ipynb
 - Exported scraped data to csv
 - Retrives single video details and channel details combined
-- Both main files with .py and .ipynb are same
-- Added mute and pause logic when it visits the channel url
 
