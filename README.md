@@ -34,7 +34,7 @@ Follow these steps to get the scraper up and running:
 1.  **Clone the repository (or download the script):**
     First, get the code onto your local machine.
     ```bash
-    git clone [https://github.com/parthjs27/yt-scraper.git](https://github.com/parthjs27/yt-scraper.git)
+    git clone (https://github.com/parthjs27/yt-scraper.git)
     ```
 
 2.  **Create a virtual environment:**
