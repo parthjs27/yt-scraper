@@ -34,10 +34,8 @@ Follow these steps to get the scraper up and running:
 1.  **Clone the repository (or download the script):**
     First, get the code onto your local machine.
     ```bash
-    git clone [https://github.com/your-username/your-repo-name.git](https://github.com/your-username/your-repo-name.git)
-    cd your-repo-name
+    git clone [https://github.com/parthjs27/yt-scraper.git](https://github.com/parthjs27/yt-scraper.git)
     ```
-    *(Remember to replace `your-username` and `your-repo-name` with your actual GitHub repository details.)*
 
 2.  **Create a virtual environment:**
     It's always a good practice to use a **virtual environment** to manage project dependencies. This keeps your project's libraries separate from your system's global Python installation.
