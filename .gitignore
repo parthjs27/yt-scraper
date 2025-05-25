@@ -13,6 +13,9 @@ scraper-env/
 *.xlsx
 *.xls
 
+# Directories
+csvs/
+
 # OS/Editor-specific
 .DS_Store
 .vscode/
