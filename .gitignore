@@ -20,3 +20,5 @@ csvs/
 .DS_Store
 .vscode/
 .idea/
+
+frontend/
