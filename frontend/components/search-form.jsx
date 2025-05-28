@@ -23,7 +23,7 @@ export default function SearchForm({ onSearch, isLoading }) {
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <Label htmlFor="search-query" className="text-sm text-gray-300 mb-2 block">
-            Search query
+            Search Query
           </Label>
           <Input
             id="search-query"
@@ -50,7 +50,7 @@ export default function SearchForm({ onSearch, isLoading }) {
         </div>
 
         <Button type="submit" className="w-full bg-gray-700 hover:bg-gray-600 text-white" disabled={isLoading}>
-          {isLoading ? "Searching..." : "start"}
+          {isLoading ? "Searching..." : "START"}
         </Button>
       </form>
     </div>

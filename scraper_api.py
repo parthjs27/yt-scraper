@@ -159,6 +159,7 @@ def run_scraper(search_query: str, max_channel_links: int):
         chrome_options.add_argument('--disable-dev-shm-usage')
         chrome_options.add_argument('--disable-gpu')
         chrome_options.add_argument('--window-size=1920,1080')
+        chrome_options.add_argument('--mute-audio')
         
         # Use a more direct approach to initialize ChromeDriver
         driver_path = ChromeDriverManager().install()
@@ -186,16 +187,21 @@ def run_scraper(search_query: str, max_channel_links: int):
             
             logging.info("Getting channel details...")
             details = getChannelDetails(driver, links)
+            # print(details)
+            
             logging.info(f"Collected details for {len(details)} channels")
 
             logging.info("Creating csvs directory...")
             os.makedirs('csvs', exist_ok=True)
             
             logging.info("Saving channel URLs...")
+            # pd.DataFrame(links, columns=['channel_url']).to_csv('csvs/channel_urls.csv', index=False)
             pd.DataFrame(links, columns=['channel_url']).to_csv('csvs/channel_urls.csv', index=False)
             
             logging.info("Saving channel details...")
-            pd.DataFrame(details).to_csv('csvs/channel_details.csv', index=False)
+            # pd.DataFrame(details).to_csv('csvs/channel_details.csv', index=False)
+            records = pd.DataFrame(details)
+            records.to_csv('csvs/channel_details.csv', index=False)
             
             logging.info("Scraping completed successfully")
             return True

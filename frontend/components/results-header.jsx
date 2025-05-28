@@ -12,7 +12,7 @@ export default function ResultsHeader({ count, onDownloadCSV }) {
         onClick={onDownloadCSV}
         variant="outline"
         size="sm"
-        className="border-gray-600 text-gray-300 hover:bg-gray-700"
+        className="bg-gray-700 border-white-600" 
       >
         <Download className="w-4 h-4 mr-2" />
         CSV
