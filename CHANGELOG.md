@@ -1,6 +1,6 @@
 # Changelog
 
-## [v1.3] - 2025-05-25
+## [v1.3] - 2025-05-28
 ### Added
 - Filename: scraper_api.py
 - Added UI for end users
