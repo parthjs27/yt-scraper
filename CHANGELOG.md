@@ -1,5 +1,14 @@
 # Changelog
 
+## [v1.3] - 2025-05-25
+### Added
+- Filename: scraper_api.py
+- Added UI for end users
+- Can download the CSV
+- Used FastAPI
+- Automatic mutes videos
+- Removed the process of opening new tab for scraping
+
 ## [v1.2] - 2025-05-25
 ### Added
 - Filename: main.py / main.ipynb
