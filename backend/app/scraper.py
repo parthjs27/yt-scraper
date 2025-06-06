@@ -10,6 +10,7 @@ import time
 import pandas as pd
 import logging
 import os
+import uuid
 
 # --- Config Constants ---
 INITIAL_PAGE_LOAD_DELAY = 3
@@ -178,7 +179,7 @@ def getChannelDetails(driver, channel_links, CHANNEL_PAGE_LOAD_DELAY):
     logger.info("Channel details collection complete.")
     return data
 
-def run_scraper(search_query="tech reviews 2025", min_links=3, max_links=3):
+def run_scraper(search_query="tech reviews 2025", min_links=3, max_links=3, job_id = None):
     logger.info(f"Running scraper for query: {search_query}")
     driver = initializeWebDriver()
     try:
@@ -186,18 +187,30 @@ def run_scraper(search_query="tech reviews 2025", min_links=3, max_links=3):
         navigateAndApplyVideoFilter(driver, search_query, MAX_WAIT_TIME)
         channel_links = collectUniqueChannelLinks(driver, min_links, max_links)
         details = getChannelDetails(driver, channel_links, CHANNEL_PAGE_LOAD_DELAY)
-
+        if job_id is None:
+            job_id = str(uuid.uuid4())
+            logger.warning(f"No job_id provided, generating a new one: {job_id}")
         os.makedirs('csvs', exist_ok=True)
-        urls_path = 'csvs/channel_urls.csv'
-        details_path = 'csvs/channel_details.csv'
+        #urls_path = 'csvs/channel_urls.csv'
+        #details_path = 'csvs/channel_details.csv'
+        urls_path = f'csvs/{job_id}_channel_urls.csv'       # Unique filename
+        details_path = f'csvs/{job_id}_channel_details.csv' # Unique filename
         pd.DataFrame(channel_links, columns=['channel_url']).to_csv(urls_path, index=False)
         pd.DataFrame(details).to_csv(details_path, index=False)
-
+        '''
         logger.info("Scraping completed. Files saved.")
         return {
             "channel_urls_path": urls_path,
             "channel_details_path": details_path,
             "channel_count": len(channel_links),
+        }
+        '''
+        logger.info(f"Scraping completed for job_id {job_id}. Files saved.")
+        return {
+            "channel_urls_path": urls_path,
+            "channel_details_path": details_path,
+            "channel_count": len(channel_links),
+            "job_id": job_id # Return job_id for completeness
         }
     finally:
         closeWebDriver(driver)
