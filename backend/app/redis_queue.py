@@ -4,8 +4,9 @@ import json
 
 r = redis.Redis(host='localhost', port=6379, db=0)
 
-def enqueue_scrape_task(query, max_links):
+def enqueue_scrape_task(query, max_links, job_id):
     job = {
+        "job_id": job_id,
         "search_query": query,
         "max_channel_links": max_links
     }
