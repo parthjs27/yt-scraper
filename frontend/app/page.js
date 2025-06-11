@@ -20,7 +20,8 @@ export default function YTScraperApp() {
     setMaxChannels(max)
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/scrape', {
+      // First, queue the scrape job
+      const queueResponse = await fetch('http://127.0.0.1:8000/scrape', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -32,31 +33,51 @@ export default function YTScraperApp() {
         })
       });
 
-      if (!response.ok) {
-        throw new Error('Failed to fetch data');
+      if (!queueResponse.ok) {
+        throw new Error('Failed to queue scrape job');
       }
 
-      const data = await response.json();
+      const queueData = await queueResponse.json();
+      const jobId = queueData.job_id;
+
+      // Poll for results
+      let attempts = 0;
+      const maxAttempts = 30; // 30 attempts with 2 second delay = 1 minute timeout
       
-      if (data.status === 'success') {
-        const formattedChannels = data.channel_details.map(channel => ({
-          id: channel.channel_url,
-          name: channel.channel_url.split('@')[1],
-          nationality: channel.nationality === 'Not found' ? 'Unknown' : channel.nationality,
-          joinedOn: channel.joined_on === 'Not found' ? 'Unknown' : channel.joined_on,
-          subscribers: channel.subscribers === 'Not found' ? '0' : channel.subscribers,
-          videos: channel.videos_count === 'Not found' ? 0 : parseInt(channel.videos_count.replace(/[^0-9]/g, '')),
-          totalViews: channel.total_views === 'Not found' ? '0' : channel.total_views,
-        }));
+      while (attempts < maxAttempts) {
+        const resultsResponse = await fetch(`http://127.0.0.1:8000/data/${jobId}`);
         
-        setResults(formattedChannels);
-        if (formattedChannels.length > 0) {
-          setSelectedChannel(formattedChannels[0]);
-        } else {
-          setSelectedChannel(null);
+        if (resultsResponse.ok) {
+          const data = await resultsResponse.json();
+          
+          if (data.status === 'completed') {
+            const formattedChannels = data.channel_details.map(channel => ({
+              id: channel.channel_url,
+              name: channel.channel_url.split('@')[1],
+              nationality: channel.nationality === 'Not found' ? 'Unknown' : channel.nationality,
+              joinedOn: channel.joined_on === 'Not found' ? 'Unknown' : channel.joined_on,
+              subscribers: channel.subscribers === 'Not found' ? '0' : channel.subscribers,
+              videos: channel.videos_count === 'Not found' ? 0 : parseInt(channel.videos_count.replace(/[^0-9]/g, '')),
+              totalViews: channel.total_views === 'Not found' ? '0' : channel.total_views,
+            }));
+            
+            setResults(formattedChannels);
+            if (formattedChannels.length > 0) {
+              setSelectedChannel(formattedChannels[0]);
+            } else {
+              setSelectedChannel(null);
+            }
+            break;
+          }
         }
-      } else {
-        throw new Error('API returned unsuccessful status');
+        
+        // Wait 2 seconds before next attempt
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        attempts++;
+      }
+
+      if (attempts >= maxAttempts) {
+        throw new Error('Scraping timed out. Please try again.');
       }
     } catch (error) {
       console.error('Error fetching data:', error);
