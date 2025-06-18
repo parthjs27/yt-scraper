@@ -1,6 +1,6 @@
 # 📺 YouTube Scraper
 
-A scalable and efficient YouTube data scraper built using **FastAPI**, **Selenium**, and **Redis**, designed to extract information like channel metadata, video details, and more. Built for extensibility and high-volume scraping.
+A scalable and efficient YouTube data scraper built using **FastAPI**, **Selenium**, and **Redis**, designed to extract information like channel metadata. Built for extensibility and high-volume scraping.
 
 ---
 
