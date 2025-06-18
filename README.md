@@ -23,3 +23,6 @@ A scalable and efficient YouTube data scraper built using **FastAPI**, **Seleniu
 | Scheduler   | cron (Linux)         |
 | Deployment  | EC2 (Ubuntu AMI)     |
 | Frontend    | Next.js (Static/SSR) |
+
+## Project Link
+- My website: [YT Scraper] https://yt-scraper-nu.vercel.app/
