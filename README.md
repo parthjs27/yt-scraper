@@ -26,3 +26,6 @@ A scalable and efficient YouTube data scraper built using **FastAPI**, **Seleniu
 
 ## Project Link
 - My website: [YT Scraper] https://yt-scraper-nu.vercel.app/
+
+## Backend Setup Guide
+- Backend setup guide: https://www.notion.so/YT-Scraper-Project-Backend-2157388a5a9d80bd82a6cda3143e87ff?source=copy_link 
