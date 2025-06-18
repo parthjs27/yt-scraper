@@ -25,4 +25,4 @@ A scalable and efficient YouTube data scraper built using **FastAPI**, **Seleniu
 | Frontend    | Next.js (Static/SSR) |
 
 ## Project Link
-- My website: [YT Scraper]([https://www.yourwebsite.com](https://yt-scraper-nu.vercel.app/))
+- My website: [YT Scraper] https://www.yourwebsite.com](https://yt-scraper-nu.vercel.app/
